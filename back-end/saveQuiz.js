@@ -37,9 +37,7 @@ const server = http.createServer(function(request, response) {
                 });
             
             for (let i=0; i < jsonParse.length; i++){
-                let writeSQL = 'INSERT INTO quote(quoteId, quote) VALUES(' + jsonParse[i].quoteId + ",'" + jsonParse[i].quote + "')";
-                console.log(writeSQL);
-                connection.query(writeSQL, function (err, result) {
+                connection.query("INSERT INTO quoteList(quoteID, quoteText) VALUES (?,?)", [outputThing[i].quoteID, outputThing[i].quoteText], function (err, result) {
                     if (err) throw err;
                     response.end(result);
                 });
